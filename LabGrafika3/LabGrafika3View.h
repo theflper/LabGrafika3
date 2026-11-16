@@ -29,7 +29,7 @@ protected:
 	virtual void OnBeginPrinting(CDC* pDC, CPrintInfo* pInfo);
 	virtual void OnEndPrinting(CDC* pDC, CPrintInfo* pInfo);
 	int startPosX = 125; // na primer donji red
-	int startPosY = 265; // srednja kolona (kao na slici)
+	int startPosY = 264; // srednja kolona (kao na slici)
 
 // Implementation
 public:

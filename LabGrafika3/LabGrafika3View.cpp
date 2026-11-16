@@ -315,6 +315,8 @@ void CLabGrafika3View::OnDraw(CDC* pDC)
 	ASSERT_VALID(pDoc);
 	if (!pDoc)
 		return;
+	Mirror(pDC, true, false, false);
+	Translate(pDC, -500, 0, false);
 	// Dobijamo veličinu klijentskog prozora
 	CRect rect;
 	GetClientRect(&rect);
@@ -345,23 +347,23 @@ void CLabGrafika3View::OnDraw(CDC* pDC)
 	// Učitavanje i iscrtavanje puzle pozivanjem DrawPuzzlePiece na memDC
 	DImage img;
 	img.Load(putanjaDoFajla(_T("monalisa0.bmp"))); // ili odgovarajući fajl puzle
-	DrawPuzzlePiece(&memDC, img, -25, 265, 25, 1, 1, false, false, false);
+	DrawPuzzlePiece(&memDC, img, 275, -35, 25+180, 1, 1, false, false, false);
 	img.Load(putanjaDoFajla(_T("monalisa1.bmp")));
-	DrawPuzzlePiece(&memDC, img, 125, 115, -122.5f, 1, 1, false, false, false);
+	DrawPuzzlePiece(&memDC, img, 125, 115, -122.5f+180, 1, 1, false, false, false);
 	img.Load(putanjaDoFajla(_T("monalisa8.bmp")));
-	DrawPuzzlePiece(&memDC, img, -25, 115, -73, 1, 1, false, false, false);
+	DrawPuzzlePiece(&memDC, img, 275, 115, -73+180, 1, 1, false, false, false);
 	img.Load(putanjaDoFajla(_T("monalisa5.bmp")));
-	DrawPuzzlePiece(&memDC, img, startPosX, startPosY, 55, 1, 1, false, false, true);
+	DrawPuzzlePiece(&memDC, img, 125, -35, 55+180, 1, 1, false, false, false);
 	img.Load(putanjaDoFajla(_T("monalisa2.bmp")));
-	DrawPuzzlePiece(&memDC, img, 275, 115, -108, 1, 1, false, false, false);
+	DrawPuzzlePiece(&memDC, img, -25, 115, -108+180, 1, 1, false, false, false);
 	img.Load(putanjaDoFajla(_T("monalisa3.bmp")));
-	DrawPuzzlePiece(&memDC, img, -25, -35, -161, 1, 1, false, false, false);
+	DrawPuzzlePiece(&memDC, img, 275, 265, -161+180, 1, 1, false, false, false);
 	img.Load(putanjaDoFajla(_T("monalisa4.bmp")));
-	DrawPuzzlePiece(&memDC, img, 275, 265, 104, 1, 1, false, false, false);
+	DrawPuzzlePiece(&memDC, img, -25, -35, 104+180, 1, 1, false, false, false);
 	img.Load(putanjaDoFajla(_T("monalisa6.bmp")));
-	DrawPuzzlePiece(&memDC, img, 125, -36, -67, 1, 1, false, false, false);
+	DrawPuzzlePiece(&memDC, img, startPosX, startPosY, -67+180, 1, 1, false, false, true);
 	img.Load(putanjaDoFajla(_T("monalisa7.bmp")));
-	DrawPuzzlePiece(&memDC, img, 275, -35, -19, 1, 1, false, false, false);
+	DrawPuzzlePiece(&memDC, img, -25, 265, -19+180, 1, 1, false, false, false);
 	// Prenos sadržaja sa memorijskog DC-ja na ekran (glavni pDC) u jednom koraku
 	pDC->BitBlt(0, 0, rect.Width(), rect.Height(), &memDC, 0, 0, SRCCOPY);
 
@@ -415,8 +417,8 @@ CLabGrafika3Doc* CLabGrafika3View::GetDocument() const // non-debug version is i
 
 void CLabGrafika3View::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 {
-	if (nChar == VK_LEFT)  {startPosX -= 5; Invalidate();}
-	if (nChar == VK_RIGHT) { startPosX += 5; Invalidate(); }
+	if (nChar == VK_LEFT)  {startPosX += 5; Invalidate();}
+	if (nChar == VK_RIGHT) { startPosX -= 5; Invalidate(); }
 	if (nChar == VK_UP) { startPosY -= 5; Invalidate();}
 	if (nChar == VK_DOWN) { startPosY += 5; Invalidate(); }
 	// TODO: Add your message handler code here and/or call default
